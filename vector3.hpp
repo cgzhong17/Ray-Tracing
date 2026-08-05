@@ -6,6 +6,14 @@ class Vector3{
     public:
         Vector3();
         Vector3(double x, double y, double z);
+        double getX() const;
+        double getY() const;
+        double getZ() const;
+        Vector3 operator-(const Vector3& other) const;
+        Vector3 operator+(const Vector3& other) const;
+        Vector3 operator*(double scaler) const;
+        double dot(const Vector3& other) const;
+        double length() const;
 
     private:
         double x;
