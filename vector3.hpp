@@ -14,6 +14,7 @@ class Vector3{
         Vector3 operator*(double scaler) const;
         double dot(const Vector3& other) const;
         double length() const;
+        Vector3 normalized() const;
 
     private:
         double x;

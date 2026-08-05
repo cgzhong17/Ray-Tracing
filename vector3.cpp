@@ -40,6 +40,11 @@ double Vector3 :: length() const{
     return sqrt(x*x + y*y + z*z);
 }
 
+Vector3 Vector3 :: normalized() const{
+    double len = this->length();
+    return Vector3(x / len, y / len, z / len);
+}
+
 Vector3 PhysicalObjects :: getPosition() const{
     return position;
 }
