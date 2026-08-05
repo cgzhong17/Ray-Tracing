@@ -59,9 +59,13 @@ Color :: Color() : r{0.0}, g{0.0}, b{0.0} {}
 
 Color :: Color(double r, double g, double b) : r{r}, g{g}, b{b} {}
 
+Sphere :: Sphere(Vector3 position, std :: shared_ptr<Color> color, double radius) : PhysicalObjects{position, color}, radius{radius} {}
+
 double Sphere :: shape() const{
     return (4.0/3.0) * PI * pow(radius, 3);
 }
+
+Cube :: Cube(Vector3 position, std :: shared_ptr<Color> color, double length, double width, double height) : PhysicalObjects{position, color}, length{length}, width{width}, height{height} {}
 
 double Cube :: shape() const{
     return length * width * height;

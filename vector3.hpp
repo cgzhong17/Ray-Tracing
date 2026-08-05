@@ -1,3 +1,4 @@
+#pragma once
 #include <vector>
 #include <memory>
 
@@ -32,6 +33,8 @@ class Color{
         double b;
 };
 
+class Ray;
+
 class PhysicalObjects {
     public:
         PhysicalObjects(Vector3 position, std :: shared_ptr<Color> color);
@@ -44,16 +47,19 @@ class PhysicalObjects {
         std :: shared_ptr<Color> color;
 };
 
+
 class Sphere : public PhysicalObjects{
     public:
+        Sphere(Vector3 position, std :: shared_ptr<Color> color, double radius);
         double shape() const;
-
+        bool isIntersected(const Ray& ray, double& t) const;
     private:
         double radius;
 };
 
 class Cube : public PhysicalObjects {
     public:
+        Cube(Vector3 position, std :: shared_ptr<Color> color, double length, double width, double height);
         double shape() const;
     private:
         double length;
