@@ -1,5 +1,7 @@
 #include "raytracer.hpp"
 #include <cmath>
+#include <SDL2/SDL.h>
+#include <algorithm>
 
 Ray :: Ray() : origin{0.0, 0.0, 0.0}, direction{0.0, 0.0, 0.0} {}
 
@@ -31,8 +33,8 @@ bool Sphere :: isIntersected(const Ray& ray, double& t) const{
         return false;
 
     // Calculate x1, x2 for quadratic equation (-b +- sqrt(b^2 - 4ac)) / 2a
-    double intersect_pt1 = (-1.0 * b - sqrt(b * b - 4 * a * c)) / 2.0 * a;
-    double intersect_pt2 = (-1.0 * b + sqrt(b * b - 4 * a * c)) / 2.0 * a;
+    double intersect_pt1 = (-1.0 * b - sqrt(b * b - 4 * a * c)) / (2.0 * a);
+    double intersect_pt2 = (-1.0 * b + sqrt(b * b - 4 * a * c)) / (2.0 * a);
 
     if(intersect_pt1 > 0){
         t = intersect_pt1;
@@ -44,5 +46,18 @@ bool Sphere :: isIntersected(const Ray& ray, double& t) const{
         return true;
     }
     return false;
+}
+
+Color shading(const Sphere& o, const Vector3 light_pos, const Ray& camera_ray, double& t){
+   Vector3 hit_point = camera_ray.getPoint(t);
+   Vector3 normal = (hit_point - o.getPosition()).normalized();
+   Vector3 light_dir = (light_pos - hit_point).normalized();
+
+   double intensity = std :: max(0.0, normal.dot(light_dir));
+   Uint8 r = static_cast<Uint8>(std::clamp(o.getColor_ptr()->GetR() * intensity, 0.0, 255.0));
+   Uint8 g = static_cast<Uint8>(std::clamp(o.getColor_ptr()->GetG() * intensity, 0.0, 255.0));
+   Uint8 b = static_cast<Uint8>(std::clamp(o.getColor_ptr()->GetB() * intensity, 0.0, 255.0));
+
+   return Color(r, g, b);
 }
 

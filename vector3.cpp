@@ -51,13 +51,25 @@ Vector3 PhysicalObjects :: getPosition() const{
 
 PhysicalObjects :: PhysicalObjects(Vector3 position, shared_ptr<Color> color_ptr) : position{position}, color{color_ptr} {}
 
-shared_ptr<Color> PhysicalObjects :: getColor() const{
+shared_ptr<Color> PhysicalObjects :: getColor_ptr() const{
     return color;
 }
 
 Color :: Color() : r{0.0}, g{0.0}, b{0.0} {}
 
 Color :: Color(double r, double g, double b) : r{r}, g{g}, b{b} {}
+
+double Color :: GetR() const{
+    return r;
+}
+
+double Color :: GetG() const{
+    return g;
+}
+
+double Color :: GetB() const{
+    return b;
+}
 
 Sphere :: Sphere(Vector3 position, std :: shared_ptr<Color> color, double radius) : PhysicalObjects{position, color}, radius{radius} {}
 

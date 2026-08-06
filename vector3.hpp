@@ -27,6 +27,9 @@ class Color{
     public:
         Color();
         Color(double r, double g, double b);
+        double GetR() const;
+        double GetG() const;
+        double GetB() const;
     private:
         double r;
         double g;
@@ -40,7 +43,7 @@ class PhysicalObjects {
         PhysicalObjects(Vector3 position, std :: shared_ptr<Color> color);
         virtual double shape() const = 0;
         Vector3 getPosition() const;
-        std :: shared_ptr<Color> getColor() const;
+        std :: shared_ptr<Color> getColor_ptr() const;
 
     private:
         Vector3 position;
