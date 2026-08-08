@@ -49,6 +49,10 @@ Vector3 PhysicalObjects :: getPosition() const{
     return position;
 }
 
+void PhysicalObjects :: setPosition(const Vector3& position){
+    this->position = position;
+}
+
 PhysicalObjects :: PhysicalObjects(Vector3 position, shared_ptr<Color> color_ptr) : position{position}, color{color_ptr} {}
 
 shared_ptr<Color> PhysicalObjects :: getColor_ptr() const{
@@ -77,10 +81,21 @@ double Sphere :: shape() const{
     return (4.0/3.0) * PI * pow(radius, 3);
 }
 
+Vector3 Sphere :: getNormal(const Vector3& point) const{
+    return (point - getPosition()).normalized();
+}
+
 Cube :: Cube(Vector3 position, std :: shared_ptr<Color> color, double length, double width, double height) : PhysicalObjects{position, color}, length{length}, width{width}, height{height} {}
 
 double Cube :: shape() const{
     return length * width * height;
 }
 
+Vector3 Cube :: getNormal(const Vector3& point) const{
+    return Vector3(1, 1, 1);
+}
+
+bool Cube :: isIntersected(const Ray& ray, double& t) const{
+    return true;
+}
 

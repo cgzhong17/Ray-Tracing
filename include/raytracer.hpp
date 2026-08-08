@@ -13,4 +13,4 @@ class Ray{
         Vector3 direction;
 };
 
-Color shading(const Sphere& o, const Vector3 light_pos, const Ray& camera_ray, double& t);
+Color shading(const PhysicalObjects& o, const Vector3 light_pos, const Ray& camera_ray, double& t);

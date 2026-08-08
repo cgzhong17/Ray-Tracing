@@ -43,7 +43,10 @@ class PhysicalObjects {
         PhysicalObjects(Vector3 position, std :: shared_ptr<Color> color);
         virtual double shape() const = 0;
         Vector3 getPosition() const;
+        void setPosition(const Vector3& position);
         std :: shared_ptr<Color> getColor_ptr() const;
+        virtual bool isIntersected(const Ray& ray, double& t) const = 0;
+        virtual Vector3 getNormal(const Vector3& point) const = 0;
 
     private:
         Vector3 position;
@@ -55,7 +58,9 @@ class Sphere : public PhysicalObjects{
     public:
         Sphere(Vector3 position, std :: shared_ptr<Color> color, double radius);
         double shape() const;
-        bool isIntersected(const Ray& ray, double& t) const;
+        bool isIntersected(const Ray& ray, double& t) const override;
+        Vector3 getNormal(const Vector3& point) const override;
+
     private:
         double radius;
 };
@@ -64,6 +69,9 @@ class Cube : public PhysicalObjects {
     public:
         Cube(Vector3 position, std :: shared_ptr<Color> color, double length, double width, double height);
         double shape() const;
+        bool isIntersected(const Ray& ray, double& t) const override;
+        Vector3 getNormal(const Vector3& point) const override;
+
     private:
         double length;
         double width;

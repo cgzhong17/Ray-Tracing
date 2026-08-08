@@ -48,9 +48,9 @@ bool Sphere :: isIntersected(const Ray& ray, double& t) const{
     return false;
 }
 
-Color shading(const Sphere& o, const Vector3 light_pos, const Ray& camera_ray, double& t){
+Color shading(const PhysicalObjects& o, const Vector3 light_pos, const Ray& camera_ray, double& t){
    Vector3 hit_point = camera_ray.getPoint(t);
-   Vector3 normal = (hit_point - o.getPosition()).normalized();
+   Vector3 normal = o.getNormal(hit_point);
    Vector3 light_dir = (light_pos - hit_point).normalized();
 
    double intensity = std :: max(0.0, normal.dot(light_dir));
